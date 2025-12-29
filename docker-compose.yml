@@ -1,0 +1,35 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  users:
+    build: ./users
+    ports: ["8001:8000"]
+
+  orders:
+    build: ./orders
+    environment:
+      - USERS_URL=http://users:8000
+      - AMQP_URL=amqp://guest:guest@rabbitmq:5672/
+    ports: ["8002:8000"]
+    depends_on:
+      - users
+      - rabbitmq
+
+  gateway:
+    build: ./gateway
+    environment:
+      - ORDERS_URL=http://orders:8000
+    ports: ["8000:8000"]
+    depends_on: [orders]
+
+  notification:
+    build: ./notification
+    environment:
+      - AMQP_URL=amqp://guest:guest@rabbitmq:5672/
+    ports: ["8003:8000"]
+    depends_on:
+      - rabbitmq

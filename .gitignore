@@ -1,0 +1,41 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# ===== FastAPI / Uvicorn =====
+*.log
+
+# ===== Docker =====
+*.pid
+docker-compose.override.yml
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.iml
+
+# ===== ngrok =====
+ngrok.yml
+.ngrok2/
+.ngrok/
+
+# ===== Cloud / Secrets =====
+*.key
+*.pem
+*.crt
+*.p12
+
+# ===== Build artifacts =====
+dist/
+build/
